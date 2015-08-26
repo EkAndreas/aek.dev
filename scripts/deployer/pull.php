@@ -3,7 +3,7 @@
 task( 'pull:dump', function () {
 
     writeln( 'Creating a new database dump (approx. 10s)' );
-    run( 'cd current/web && wp db export' );
+    run( 'cd current/web && wp db export --allow-root' );
 
 } );
 
@@ -17,14 +17,14 @@ task( 'pull:fetch_dump', function () {
 task( 'pull:resolve_dump', function () {
 
     writeln( 'Restore database inside vagrant (approx. 10s)' );
-    runLocally( 'cd ../vagrant && vagrant ssh -c "mysql -u root -proot aek < /var/www/aek.dev/andreasek.sql" && cd ../aek.dev', 999 );
+    runLocally( 'cd .. && vagrant ssh -c "mysql -u root -proot aek < /var/www/aek.dev/andreasek.sql" && cd aek.dev', 999 );
 
 } );
 
 task( 'pull:set_vagrant_wp', function () {
 
     writeln( 'Restore wp after pull (approx. 60s)' );
-    runLocally( 'cd ../vagrant && vagrant ssh -c "cd /var/www/aek.dev/web && wp search-replace www.andreasek.se aek.dev && cd ../aek.dev',
+    runLocally( 'cd .. && vagrant ssh -c "cd /var/www/aek.dev/web && wp search-replace www.andreasek.se aek.dev" && cd aek.dev',
         999 );
 
 } );
