@@ -20,14 +20,14 @@ set('repository', 'git@github.com:EkAndreas/aek.dev.git');
 // Symlink the .env file for Bedrock
 set('env', 'prod');
 set('keep_releases', 10);
-set('shared_dirs', ['web/app/uploads', 'web/app/cache', 'web/app/w3tc-config']);
-set('shared_files', ['.env', 'web/.htaccess', 'web/app/plugins/w3tc-wp-loader.php', 'web/app/advanced-cache.php', 'web/app/object-cache.php', 'web/app/db.php', 'web/robots.txt']);
+set('shared_dirs', ['web/app/uploads']);
+set('shared_files', ['.env', 'web/.htaccess', 'web/robots.txt']);
 set('env_vars', '/usr/bin/env');
 
 task('deploy:restart', function () {
-    run("curl -s http://www.skolporten.se/wp/wp-admin/admin-ajax.php?action=purge");
-    //run("sudo service apache2 restart");
-//    run("sudo service varnish restart");
+    //run("curl -s http://www.skolporten.se/wp/wp-admin/admin-ajax.php?action=purge");
+    run("sudo service apache2 restart");
+    //run("sudo service varnish restart");
 })->desc('Restarting apache2 and varnish');
 
 task( 'deploy', [
