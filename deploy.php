@@ -20,7 +20,7 @@ set('repository', 'git@github.com:EkAndreas/aek.dev.git');
 // Symlink the .env file for Bedrock
 set('env', 'prod');
 set('keep_releases', 10);
-set('shared_dirs', ['web/app/uploads']);
+set('shared_dirs', ['web/app/uploads','web/fever']);
 set('shared_files', ['.env', 'web/.htaccess', 'web/robots.txt']);
 set('env_vars', '/usr/bin/env');
 
