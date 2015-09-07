@@ -4,7 +4,7 @@ date_default_timezone_set('Europe/Stockholm');
 include_once 'scripts/deployer/common.php';
 include_once 'scripts/deployer/pull.php';
 
-server( 'development', 'aek.dev.dev' )
+server( 'development', 'aek.dev' )
     ->env('deploy_path','/var/www/aek.dev')
     ->env('branch', 'master')
     ->user( 'vagrant', 'vagrant' );
@@ -42,3 +42,9 @@ task( 'deploy', [
     'success'
 ] )->desc( 'Deploy your Bedrock project, eg dep deploy production' );
 
+
+task( 'test:newsflow', function () {
+    writeln(run("cd web/app/plugins/wp_phpunit_example && phpunit" ));
+} );
+
+task('test',['test:newsflow'])->desc('plugin test');
